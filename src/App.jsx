@@ -51,7 +51,7 @@ function App() {
     fetchJobs();
   }, [])
   return (
-    <div className="pb-10">
+    <div className="flex flex-col items-center pb-10">
       <Navbar />
       <Header />
       <SearchBar fetchFilteredJobs={fetchFilteredJobs} fetchJobs={fetchJobs} clearFilters={clearFilter}/>
