@@ -2,6 +2,7 @@ import Header from "./components/Header"
 import Navbar from "./components/Navbar"
 import SearchBar from "./components/SearchBar"
 import JobCard from "./components/JobCard"
+import Notification from "./components/Notification"
 import { useState, useEffect } from "react"
 import { collection, query, where, orderBy, getDocs } from "firebase/firestore"
 import { db } from "./firebase.config"
@@ -48,11 +49,12 @@ function Home() {
   return (
     <div className="flex flex-col items-center pb-10">
       <Navbar />
-      <Header />
-      <SearchBar fetchFilteredJobs={fetchFilteredJobs} fetchJobs={fetchJobs} clearFilters={clearFilter}/>
+      <Header fetchJobs={fetchJobs} />
+      <SearchBar fetchFilteredJobs={fetchFilteredJobs} fetchJobs={fetchJobs} clearFilters={clearFilter} />
       {jobs.map((job)=> (
-        <JobCard key={job.id} {...job}/>
+        <JobCard key={job.id} {...job} />
       ))}
+      {/* <Notification /> */}
     </div>
 
   )
