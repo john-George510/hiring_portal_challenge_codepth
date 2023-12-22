@@ -17,7 +17,7 @@ Please do not change the password for this account so other users can also use i
 - Job posting
 - Job application
 - Viewing applications
-- Push notifications
+- Push notifications (requires Chrome)
 
 ## Installation
 

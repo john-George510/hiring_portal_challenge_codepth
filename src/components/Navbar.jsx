@@ -11,7 +11,6 @@ function Navbar() {
     const fetchJobId = async () => {
       if (!auth.currentUser) return;
       try {
-        console.log(auth.currentUser.uid)
         const q = query(collection(db, "jobs"), where("postedBy", "==", auth.currentUser.uid));
         const querySnapshot = await getDocs(q);
         const data = querySnapshot.docs.map((doc) => ({
