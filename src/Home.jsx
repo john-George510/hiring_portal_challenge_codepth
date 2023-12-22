@@ -54,7 +54,7 @@ function Home() {
       {jobs.map((job)=> (
         <JobCard key={job.id} {...job} />
       ))}
-      {/* <Notification /> */}
+      <Notification />
     </div>
 
   )
