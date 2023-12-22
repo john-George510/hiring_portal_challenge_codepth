@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import dayjs from 'dayjs'
+import ApplyJobModal from './ApplyJobModal'
 
 function JobCard(props) {
+	const [showModal, setShowModal] = useState(false);
+
 	const date1 = dayjs(Date.now());
 	const diffInDays = date1.diff(props.postedOn,'day');
   return (
@@ -18,11 +21,10 @@ function JobCard(props) {
 				</div>
 				<div className='flex items-center gap-4'>
 					<p className='text-gray-500'>Posted {diffInDays > 1? `${diffInDays} days`: `${diffInDays} day`} ago</p>
-					<a href={props.job_link} target="_blank" rel="noopener noreferrer">
-						<button className='text-blue-500 border border-blue-500 px-10 py-2 rounded-md'>Apply</button>
-					</a>
+						<button className='text-blue-500 border border-blue-500 px-10 py-2 rounded-md' onClick={()=>setShowModal(true)}>Apply</button>
 				</div>
 			</div>
+			<ApplyJobModal showModal={showModal} setShowModal={setShowModal} job={props} />
     </div>
   )
 }
