@@ -9,7 +9,7 @@ const JobModal = ({ showModal, setShowModal, fetchJobs,userId }) => {
   const [type, setType] = useState('');
   const [experience, setExperience] = useState('');
   const [location, setLocation] = useState('');
-  const [skills, setSkills] = useState('');
+  const [skills, setSkills] = useState('');// ['JavaScript', 'Python', 'Java', 'HTML', 'CSS', 'Node.js', 'Express.js', 'React', 'Angular'
   const [jobLink, setJobLink] = useState('');
 
   const handlePostJob = async () => {
@@ -21,19 +21,45 @@ const JobModal = ({ showModal, setShowModal, fetchJobs,userId }) => {
         type,
         experience,
         location,
-        skills: skills.split(',').map(skill => skill.trim()), // Convert string to array
+        skills, // Convert string to array
         jobLink,
 				postedBy: userId,
       });
   		console.log("Document written with ID: ", docRef.id);
       // Close the modal after posting the job
       setShowModal(false);
+			setSkills('')
 			fetchJobs();
     } catch (error) {
       // Handle error
       console.error('Error posting job:', error);
     }
   };
+
+	const skillsList = [
+		'JavaScript',
+		'Python',
+		'Java',
+		'HTML',
+		'CSS',
+		'Node.js',
+		'Express.js',
+		'React',
+		'Angular',
+	]
+
+	const handleSkillClick = (skill) => {
+
+		setSkills((prevSkills) => {
+      if (prevSkills.includes(skill)) {
+        // If the skill is already selected, remove it from the array
+        return prevSkills.filter((s) => s !== skill);
+      } else {
+        // If the skill is not selected, add it to the array
+        return [...prevSkills, skill];
+      }
+    })
+	}
 
   return (
     <>
@@ -67,18 +93,6 @@ const JobModal = ({ showModal, setShowModal, fetchJobs,userId }) => {
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3 className="text-lg leading-6 font-medium text-gray-900">Post a New Job Listing</h3>
                     <div className="mt-2">
-											{/* <div className="mb-4">
-												<label htmlFor="postedOn" className="block text-sm font-medium text-gray-700">
-													Posted On
-												</label>
-												<input
-													type="date"
-													name="postedOn"
-													id="postedOn"
-													className="mt-1 p-2 w-full border rounded-md"
-													onChange={(e) => setPostedOn(e.target.value)}
-												/>
-											</div> */}
 											<div className="mb-4">
 												<label htmlFor="title" className="block text-sm font-medium text-gray-700">
 													Job Title
@@ -161,30 +175,13 @@ const JobModal = ({ showModal, setShowModal, fetchJobs,userId }) => {
 													<option value="Hybrid">Hybrid</option>
 												</select>
 											</div>
-											<div className="mb-4">
-												<label htmlFor="skills" className="block text-sm font-medium text-gray-700">
-													Skills (comma-separated)
-												</label>
-												<input
-													type="text"
-													name="skills"
-													id="skills"
-													className="mt-1 p-2 w-full border rounded-md"
-													onChange={(e) => setSkills(e.target.value)}
-												/>
+											<div  className='flex gap-2 flex-wrap'>
+												{skillsList.map(skill => (
+													<div key={skill} className={`py-2 px-4 rounded hover:cursor-pointer ${skills.includes(skill) ? 'bg-blue-500 text-white' : 'bg-white text-black'}`} onClick={() => handleSkillClick(skill)}>
+														<p className=''>{skill}</p>
+													</div>
+												))}
 											</div>
-											{/* <div className="mb-4">
-												<label htmlFor="jobLink" className="block text-sm font-medium text-gray-700">
-													Job Link
-												</label>
-												<input
-													type="text"
-													name="jobLink"
-													id="jobLink"
-													className="mt-1 p-2 w-full border rounded-md"
-													onChange={(e) => setJobLink(e.target.value)}
-												/>
-											</div> */}
                     </div>
                   </div>
                 </div>
