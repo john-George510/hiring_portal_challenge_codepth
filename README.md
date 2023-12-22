@@ -1,8 +1,30 @@
-# React + Vite
+# JobVista
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+JobVista is a job posting and application platform. Users can post job listings, apply for jobs, and view their applications.
 
-Currently, two official plugins are available:
+## Test Account
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+For testing purposes, you can use the following account:
+
+Email: test@mail.com
+Password: test123
+
+Please do not change the password for this account so other users can also use it for testing.
+
+## Features
+
+- User authentication
+- Job posting
+- Job application
+- Viewing applications
+- Push notifications
+
+## Installation
+
+1. Clone the repository: `git clone https://github.com/john-George510/hiring_portal_challenge_codepth.git`
+2. Install the dependencies: `npm install`
+3. Start the server: `npm start`
+
+## Usage
+
+After starting the server, open `http://localhost:5173` in your browser. You can then register an account, log in, post jobs, apply for jobs, and view your applications.

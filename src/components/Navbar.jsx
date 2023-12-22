@@ -18,7 +18,6 @@ function Navbar() {
           ...doc.data(),
           id: doc.id,
         }))
-        console.log(data)
         setJobId(data[0].id);
       } catch (error) {
         console.error('Error fetching job ID:', error);
@@ -30,7 +29,7 @@ function Navbar() {
 
   return (
     <div className='h-20 absolute top-0 w-full flex items-center'>
-      <h2 className='text-4xl font-bold text-white pl-20'>JobVista</h2>
+      <a href='/' className='text-4xl font-bold text-white pl-20'>JobVista</a>
       <div className="ml-auto pr-20 text-white">
         {auth.currentUser ? (
           <div className='flex gap-6'>
