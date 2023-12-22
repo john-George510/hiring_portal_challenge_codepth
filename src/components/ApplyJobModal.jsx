@@ -25,6 +25,7 @@ function ApplyJobModal({showModal, setShowModal, job}) {
 				() => {
 					getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 						console.log('File available at', downloadURL);
+						console.log(job);
 						addDoc(collection(db, "applications"), {
 							name,
 							email,
