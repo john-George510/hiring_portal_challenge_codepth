@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { db } from '../firebase.config';
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
 
-const JobModal = ({ showModal, setShowModal }) => {
+const JobModal = ({ showModal, setShowModal, fetchJobs }) => {
   const [postedOn, setPostedOn] = useState('');
   const [title, setTitle] = useState('');
   const [company, setCompany] = useState('');
@@ -27,6 +27,7 @@ const JobModal = ({ showModal, setShowModal }) => {
   		console.log("Document written with ID: ", docRef.id);
       // Close the modal after posting the job
       setShowModal(false);
+			fetchJobs();
     } catch (error) {
       // Handle error
       console.error('Error posting job:', error);
