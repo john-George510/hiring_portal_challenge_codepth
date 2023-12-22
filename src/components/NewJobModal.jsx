@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { db } from '../firebase.config';
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
 
-const JobModal = ({ showModal, setShowModal, fetchJobs }) => {
+const JobModal = ({ showModal, setShowModal, fetchJobs,userId }) => {
   const [postedOn, setPostedOn] = useState('');
   const [title, setTitle] = useState('');
   const [company, setCompany] = useState('');
@@ -23,6 +23,7 @@ const JobModal = ({ showModal, setShowModal, fetchJobs }) => {
         location,
         skills: skills.split(',').map(skill => skill.trim()), // Convert string to array
         jobLink,
+				postedBy: userId,
       });
   		console.log("Document written with ID: ", docRef.id);
       // Close the modal after posting the job
@@ -66,124 +67,124 @@ const JobModal = ({ showModal, setShowModal, fetchJobs }) => {
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3 className="text-lg leading-6 font-medium text-gray-900">Post a New Job Listing</h3>
                     <div className="mt-2">
-										<div className="mb-4">
-											<label htmlFor="postedOn" className="block text-sm font-medium text-gray-700">
-												Posted On
-											</label>
-											<input
-												type="date"
-												name="postedOn"
-												id="postedOn"
-												className="mt-1 p-2 w-full border rounded-md"
-												onChange={(e) => setPostedOn(e.target.value)}
-											/>
-										</div>
-										<div className="mb-4">
-											<label htmlFor="title" className="block text-sm font-medium text-gray-700">
-												Job Title
-											</label>
-											<select
-												type="text"
-												name="title"
-												id="title"
-												className="mt-1 p-2 w-full border rounded-md"
-												onChange={(e) => setTitle(e.target.value)}
-											>
-												<option value="" disabled selected>Select Job Title</option>
-												<option value="iOS Developer">iOS Developer</option>
-												<option value="Frontend Developer">Frontend Developer</option>
-												<option value="Backend Developer">Backend Developer</option>
-												<option value="Android Developer">Android Developer</option>
-												<option value="Developer Advocate">Developer Advocate</option>
-											</select>
-										</div>
-										<div className="mb-4">
-											<label htmlFor="company" className="block text-sm font-medium text-gray-700">
-												Company
-											</label>
-											<input
-												type="text"
-												name="company"
-												id="company"
-												className="mt-1 p-2 w-full border rounded-md"
-												onChange={(e) => setCompany(e.target.value)}
-											/>
-										</div>
-										<div className="mb-4">
-											<label htmlFor="type" className="block text-sm font-medium text-gray-700">
-												Job Type
-											</label>
-											<select
-												id="type"
-												name="type"
-												className="mt-1 p-2 w-full border rounded-md"
-												onChange={(e) => setType(e.target.value)}
-											>
-												<option value="" disabled selected>Select Job Type</option>
-												<option value="Full time">Full Time</option>
-												<option value="Part time">Part Time</option>
-												<option value="Contract">Contract</option>
-											</select>
-										</div>
-										<div className="mb-4">
-											<label htmlFor="experience" className="block text-sm font-medium text-gray-700">
-												Experience Level
-											</label>
-											<select
-												type="text"
-												name="experience"
-												id="experience"
-												className="mt-1 p-2 w-full border rounded-md"
-												onChange={(e) => setExperience(e.target.value)}
-											>
-												<option value="" disabled selected>Select Experience Level</option>
-												<option value="Fresher">Fresher</option>
-												<option value="Junior Level">Junior Level</option>
-												<option value="Mid Level">Mid Level</option>
-												<option value="Senior Level">Senior Level</option>
-											</select>
-										</div>
-										<div className="mb-4">
-											<label htmlFor="location" className="block text-sm font-medium text-gray-700">
-												Location
-											</label>
-											<select
-												type="text"
-												name="location"
-												id="location"
-												className="mt-1 p-2 w-full border rounded-md"
-												onChange={(e) => setLocation(e.target.value)}
-											>
-												<option value="" disabled selected>Select Location</option>
-												<option value="Remote">Remote</option>
-												<option value="In-office">In-Office</option>
-												<option value="Hybrid">Hybrid</option>
-											</select>
-										</div>
-										<div className="mb-4">
-											<label htmlFor="skills" className="block text-sm font-medium text-gray-700">
-												Skills (comma-separated)
-											</label>
-											<input
-												type="text"
-												name="skills"
-												id="skills"
-												className="mt-1 p-2 w-full border rounded-md"
-												onChange={(e) => setSkills(e.target.value)}
-											/>
-										</div>
-										<div className="mb-4">
-											<label htmlFor="jobLink" className="block text-sm font-medium text-gray-700">
-												Job Link
-											</label>
-											<input
-												type="text"
-												name="jobLink"
-												id="jobLink"
-												className="mt-1 p-2 w-full border rounded-md"
-												onChange={(e) => setJobLink(e.target.value)}
-											/>
-										</div>
+											{/* <div className="mb-4">
+												<label htmlFor="postedOn" className="block text-sm font-medium text-gray-700">
+													Posted On
+												</label>
+												<input
+													type="date"
+													name="postedOn"
+													id="postedOn"
+													className="mt-1 p-2 w-full border rounded-md"
+													onChange={(e) => setPostedOn(e.target.value)}
+												/>
+											</div> */}
+											<div className="mb-4">
+												<label htmlFor="title" className="block text-sm font-medium text-gray-700">
+													Job Title
+												</label>
+												<select
+													type="text"
+													name="title"
+													id="title"
+													className="mt-1 p-2 w-full border rounded-md"
+													onChange={(e) => setTitle(e.target.value)}
+												>
+													<option value="" disabled selected>Select Job Title</option>
+													<option value="iOS Developer">iOS Developer</option>
+													<option value="Frontend Developer">Frontend Developer</option>
+													<option value="Backend Developer">Backend Developer</option>
+													<option value="Android Developer">Android Developer</option>
+													<option value="Developer Advocate">Developer Advocate</option>
+												</select>
+											</div>
+											<div className="mb-4">
+												<label htmlFor="company" className="block text-sm font-medium text-gray-700">
+													Company
+												</label>
+												<input
+													type="text"
+													name="company"
+													id="company"
+													className="mt-1 p-2 w-full border rounded-md"
+													onChange={(e) => setCompany(e.target.value)}
+												/>
+											</div>
+											<div className="mb-4">
+												<label htmlFor="type" className="block text-sm font-medium text-gray-700">
+													Job Type
+												</label>
+												<select
+													id="type"
+													name="type"
+													className="mt-1 p-2 w-full border rounded-md"
+													onChange={(e) => setType(e.target.value)}
+												>
+													<option value="" disabled selected>Select Job Type</option>
+													<option value="Full time">Full Time</option>
+													<option value="Part time">Part Time</option>
+													<option value="Contract">Contract</option>
+												</select>
+											</div>
+											<div className="mb-4">
+												<label htmlFor="experience" className="block text-sm font-medium text-gray-700">
+													Experience Level
+												</label>
+												<select
+													type="text"
+													name="experience"
+													id="experience"
+													className="mt-1 p-2 w-full border rounded-md"
+													onChange={(e) => setExperience(e.target.value)}
+												>
+													<option value="" disabled selected>Select Experience Level</option>
+													<option value="Fresher">Fresher</option>
+													<option value="Junior Level">Junior Level</option>
+													<option value="Mid Level">Mid Level</option>
+													<option value="Senior Level">Senior Level</option>
+												</select>
+											</div>
+											<div className="mb-4">
+												<label htmlFor="location" className="block text-sm font-medium text-gray-700">
+													Location
+												</label>
+												<select
+													type="text"
+													name="location"
+													id="location"
+													className="mt-1 p-2 w-full border rounded-md"
+													onChange={(e) => setLocation(e.target.value)}
+												>
+													<option value="" disabled selected>Select Location</option>
+													<option value="Remote">Remote</option>
+													<option value="In-office">In-Office</option>
+													<option value="Hybrid">Hybrid</option>
+												</select>
+											</div>
+											<div className="mb-4">
+												<label htmlFor="skills" className="block text-sm font-medium text-gray-700">
+													Skills (comma-separated)
+												</label>
+												<input
+													type="text"
+													name="skills"
+													id="skills"
+													className="mt-1 p-2 w-full border rounded-md"
+													onChange={(e) => setSkills(e.target.value)}
+												/>
+											</div>
+											{/* <div className="mb-4">
+												<label htmlFor="jobLink" className="block text-sm font-medium text-gray-700">
+													Job Link
+												</label>
+												<input
+													type="text"
+													name="jobLink"
+													id="jobLink"
+													className="mt-1 p-2 w-full border rounded-md"
+													onChange={(e) => setJobLink(e.target.value)}
+												/>
+											</div> */}
                     </div>
                   </div>
                 </div>

@@ -4,6 +4,8 @@ import { auth } from '../firebase.config';
 
 function Header( { fetchJobs } ) {
   const [showModal, setShowModal] = useState(false);
+  if (auth.currentUser) var uid = auth.currentUser.uid;
+  else var uid = null;
   const handlePostJobClick = () => {
     if (auth.currentUser) {
       setShowModal(true);
@@ -19,7 +21,7 @@ function Header( { fetchJobs } ) {
           <p className='text-xl'>Get latest job openings that best suits you!</p>
       </div>
       <button onClick={handlePostJobClick} className='bg-blue-500 text-white font-bold py-3 px-10 rounded-md mt-10'>Post a job</button>
-      <NewJobModal fetchJobs={fetchJobs} showModal={showModal} setShowModal={setShowModal} />
+      <NewJobModal fetchJobs={fetchJobs} showModal={showModal} setShowModal={setShowModal} userId={uid} />
     </div>
   )
 }
